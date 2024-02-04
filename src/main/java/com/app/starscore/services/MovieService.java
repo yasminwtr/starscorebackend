@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.starscore.domain.movie.Movie;
 import com.app.starscore.domain.movie.MovieResponseDTO;
+import com.app.starscore.domain.rate.AverageReviewResponseDTO;
 import com.app.starscore.domain.rate.Rate;
 import com.app.starscore.domain.rate.RateResponseDTO;
 import com.app.starscore.domain.watchlist.Watchlist;
@@ -87,6 +88,14 @@ public class MovieService {
                         rate.getComment(),
                         rate.getRateDate()))
                 .collect(Collectors.toList());
+    }
+
+    public AverageReviewResponseDTO getAverageReviewByMovie(Integer movieId){
+        return rateRepository.findAverageReviewByMovieId(movieId);
+    }
+
+    public Rate saveRate(Rate rate){
+        return rateRepository.save(rate);
     }
 
     public Watchlist addToWatchlist(Watchlist watchlist) {

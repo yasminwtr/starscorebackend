@@ -63,6 +63,8 @@ GET /movie/rating/{userId} - Lista de todas as avaliações de filmes feitas pel
 
 GET /movie/movieratings/{movieId} - Lista de todas as avaliações do filme.
 
+GET /movie/avgrating/{movieId} - Pegar média de avaliações do filme.
+
 POST /movie/rating - Avaliar um filme.
 
 PUT /movie/rating/{rateId} - Alterar a avaliação.

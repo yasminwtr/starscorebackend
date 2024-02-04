@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.app.starscore.domain.rate.AverageReviewResponseDTO;
 import com.app.starscore.domain.rate.Rate;
 
 public interface RateRepository extends JpaRepository<Rate, Integer>{
@@ -14,6 +15,9 @@ public interface RateRepository extends JpaRepository<Rate, Integer>{
 
     @Query("SELECT r FROM rate r WHERE r.movieId = :movieId")
     List<Rate> findByMovieId(@Param("movieId") Integer movieId);
+
+    @Query("SELECT ROUND(AVG(r.rating), 0) FROM rate r WHERE r.movieId = :movieId")
+    AverageReviewResponseDTO findAverageReviewByMovieId(@Param("movieId") Integer movieId);
 
     void deleteById(Integer rateId);
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.starscore.domain.movie.MovieResponseDTO;
+import com.app.starscore.domain.rate.AverageReviewResponseDTO;
+import com.app.starscore.domain.rate.Rate;
 import com.app.starscore.domain.rate.RateResponseDTO;
 import com.app.starscore.domain.watchlist.WatchedMovieDTO;
 import com.app.starscore.domain.watchlist.Watchlist;
@@ -60,6 +62,21 @@ public class MovieController {
             return new ResponseEntity<>(rateResponseDTOs, HttpStatus.OK);
         } else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/avgrating/{movieId}")
+    public ResponseEntity<AverageReviewResponseDTO> getAverageReviewByMovie(@PathVariable Integer movieId) {
+        AverageReviewResponseDTO averageReview = movieService.getAverageReviewByMovie(movieId);
+        if (averageReview != null) {
+            return new ResponseEntity<>(averageReview, HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/rating")
+    public ResponseEntity<Rate> saveRate(@RequestBody Rate data) {
+        Rate savedRate = movieService.saveRate(data);
+        return new ResponseEntity<>(savedRate, HttpStatus.CREATED);
     }
 
     @PostMapping("/watchlist")
