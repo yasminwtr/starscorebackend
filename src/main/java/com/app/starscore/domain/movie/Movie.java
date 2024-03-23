@@ -27,5 +27,6 @@ public class Movie {
     private String director;
     private String imageUrl;
     private String trailerUrl;
+    private String backgroundUrl;
 
 }

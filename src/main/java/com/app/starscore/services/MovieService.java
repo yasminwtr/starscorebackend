@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.starscore.domain.movie.Movie;
+import com.app.starscore.domain.movie.MovieCategory;
 import com.app.starscore.domain.movie.MovieResponseDTO;
 import com.app.starscore.domain.rate.AverageReviewResponseDTO;
 import com.app.starscore.domain.rate.Rate;
 import com.app.starscore.domain.rate.RateResponseDTO;
 import com.app.starscore.domain.watchlist.Watchlist;
 import com.app.starscore.domain.watchlist.WatchlistResponseDTO;
+import com.app.starscore.repositories.MovieCategoryRepository;
 import com.app.starscore.repositories.MovieRepository;
 import com.app.starscore.repositories.RateRepository;
 import com.app.starscore.repositories.WatchlistRepository;
@@ -29,6 +31,9 @@ public class MovieService {
     @Autowired
     private RateRepository rateRepository;
 
+    @Autowired
+    private MovieCategoryRepository movieCategoryRepository;
+
     public List<MovieResponseDTO> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
         return movies.stream()
@@ -40,8 +45,14 @@ public class MovieService {
                         movie.getDirector(),
                         movie.getImageUrl(),
                         movie.getTrailerUrl(),
+                        movie.getBackgroundUrl(),
                         movie.getMovieCategory().getName()))
                 .collect(Collectors.toList());
+    }
+
+    public List<MovieCategory> getAllCategories(){
+        List<MovieCategory> categories = movieCategoryRepository.findAll();
+        return categories;
     }
 
     public List<WatchlistResponseDTO> getUserWatchlist(Integer userId) {
@@ -57,6 +68,7 @@ public class MovieService {
                         watchlist.getMovie().getDirector(),
                         watchlist.getMovie().getImageUrl(),
                         watchlist.getMovie().getTrailerUrl(),
+                        watchlist.getMovie().getBackgroundUrl(),
                         watchlist.getMovie().getMovieCategory().getName(),
                         watchlist.getWatchedDate(),
                         watchlist.getFavorite(),

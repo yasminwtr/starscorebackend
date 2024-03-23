@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.starscore.domain.movie.MovieCategory;
 import com.app.starscore.domain.movie.MovieResponseDTO;
 import com.app.starscore.domain.rate.AverageReviewResponseDTO;
 import com.app.starscore.domain.rate.Rate;
@@ -35,6 +36,12 @@ public class MovieController {
     public ResponseEntity<List<MovieResponseDTO>> getMovies() {
         List<MovieResponseDTO> movies = movieService.getAllMovies();
         return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<MovieCategory>> getCategories() {
+        List<MovieCategory> categories = movieService.getAllCategories();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
     @GetMapping("/watchlist/{userId}")

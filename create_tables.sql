@@ -1,6 +1,9 @@
 CREATE TABLE starscore.movie_category (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    image_url VARCHAR(255)
+
 );
 
 CREATE TABLE starscore.movie (
@@ -11,6 +14,7 @@ CREATE TABLE starscore.movie (
     release_year INTEGER,
     director VARCHAR(100),
     image_url VARCHAR(255),
+    background_url VARCHAR(255),
     trailer_url VARCHAR(255)
 );
 
